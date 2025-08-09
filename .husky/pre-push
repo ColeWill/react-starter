@@ -1,2 +1,3 @@
-echo "Running linter and and tests 🧪 pre-push!"
-npm run lint && npm run test:ci
+echo "Running linter🔍, and and unit tests🧪, and e2e tests🧪 pre-push!"
+npm run lint && npm run test:ci && npm run test:e2e
+
