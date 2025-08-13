@@ -1,0 +1,51 @@
+.storybook-card {
+  border-radius: 8px;
+  padding: 16px;
+  background-color: white;
+  transition: box-shadow 0.2s ease;
+  max-width: 320px;
+}
+
+.storybook-card--default {
+  border: none;
+}
+
+.storybook-card--bordered {
+  border: 1px solid #e0e0e0;
+}
+
+.storybook-card--elevated {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.storybook-card--elevated:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.storybook-card__image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.storybook-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.storybook-card__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.storybook-card__text {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+}
