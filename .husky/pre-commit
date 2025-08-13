@@ -1,0 +1,6 @@
+# Run prettier check
+echo "🎨 Running Prettier check..."
+npx lint-staged
+
+# Run ESLint
+echo "🔍 Running ESLint..."
