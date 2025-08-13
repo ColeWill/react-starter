@@ -1,25 +1,35 @@
 import js from '@eslint/js';
 import globals from 'globals';
+import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
 import tseslint from 'typescript-eslint';
 import { globalIgnores } from 'eslint/config';
 
 export default tseslint.config([
-  globalIgnores(['dist']),
+  globalIgnores(['dist', 'node_modules', 'build', '.eslint.config.js']),
   {
-    files: ['**/*.test.{js,jsx,ts,tsx}'],
+    files: ['**/*.{js,jsx,ts,tsx}'],
     extends: [
       js.configs.recommended,
-      tseslint.configs.recommended,
-      reactHooks.configs['recommended-latest'],
-      reactRefresh.configs.vite
+      ...tseslint.configs.recommended
     ],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser
     },
-    plugins: ['react', 'react-hooks', 'jsx-a11y', '@typescript-eslint'],
+    settings: {
+      react: {
+        version: 'detect'
+      }
+    },
+    plugins: {
+      'react': react,
+      'react-hooks': reactHooks,
+      'jsx-a11y': jsxA11y,
+      '@typescript-eslint': tseslint.plugin
+    },
     rules: {
       // React-specific (essential bug prevention)
       'react/prop-types': 'off',
