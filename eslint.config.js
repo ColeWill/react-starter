@@ -5,30 +5,39 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import tseslint from 'typescript-eslint';
-import { globalIgnores } from 'eslint/config';
+
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+import storybook from "eslint-plugin-storybook";
 
 export default tseslint.config([
-  globalIgnores(['dist', 'node_modules', 'build', '.eslint.config.js']),
+  {
+    ignores: ['dist', 'node_modules', 'build', '.eslint.config.js', 'storybook-static'],
+  },
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
     extends: [
       js.configs.recommended,
-      ...tseslint.configs.recommended
+      ...tseslint.configs.recommended,
+      react.configs.flat.recommended,
+      reactHooks.configs['recommended-latest'],
+      reactRefresh.configs.vite,
     ],
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser
+      globals: globals.browser,
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
     },
     settings: {
       react: {
-        version: 'detect'
-      }
+        version: 'detect',
+      },
     },
     plugins: {
-      'react': react,
-      'react-hooks': reactHooks,
       'jsx-a11y': jsxA11y,
-      '@typescript-eslint': tseslint.plugin
     },
     rules: {
       // React-specific (essential bug prevention)
@@ -70,5 +79,6 @@ export default tseslint.config([
       'jsx-a11y/label-has-associated-control': 'error',
       'jsx-a11y/no-autofocus': 'warn'
     }
-  }
+  },
+  ...storybook.configs["flat/recommended"]
 ]);
