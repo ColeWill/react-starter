@@ -1,0 +1,47 @@
+# .github/dependabot.yml
+version: 2
+updates:
+  # Enable version updates for npm
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "your-github-username" # Replace with your username
+    assignees:
+      - "your-github-username" # Replace with your username
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    # Auto-merge patch and minor updates for dev dependencies
+    allow:
+      - dependency-type: "direct"
+      - dependency-type: "indirect"
+    # Group related updates together
+    groups:
+      testing:
+        patterns:
+          - "@testing-library/*"
+          - "vitest*"
+          - "playwright*"
+          - "jest*"
+      linting:
+        patterns:
+          - "eslint*"
+          - "prettier*"
+          - "@typescript-eslint/*"
+      react:
+        patterns:
+          - "react*"
+          - "@types/react*"
+
+  # Also keep GitHub Actions up to date
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "ci"
