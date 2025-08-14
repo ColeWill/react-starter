@@ -1,0 +1,24 @@
+FROM node:20-alpine
+
+# Handle SSL issues in Docker environment
+RUN npm config set strict-ssl false
+
+WORKDIR /app
+
+# Copy package.json
+COPY package.json ./
+
+# Generate package-lock.json and install dependencies
+RUN npm install --package-lock-only && \
+    npm ci
+
+# Reset SSL config
+RUN npm config set strict-ssl true
+
+# Copy source code
+COPY . .
+
+EXPOSE 5173
+
+# Start development server with host binding
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
